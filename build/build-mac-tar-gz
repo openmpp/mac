@@ -225,12 +225,11 @@ done
 # MacOS
 #
 
-# MacOS: build files
-
 do_cmd mkdir -p $DEPLOY_DIR/ompp-mac
 
-do_cmd cp -p  "../ompp-mac/README.md" $DEPLOY_DIR/ompp-mac/
-do_cmd cp -pr "../ompp-mac/build" $DEPLOY_DIR/ompp-mac/
+do_cp_all ../ompp-mac $DEPLOY_DIR/ompp-mac
+
+do_cmd cp -pr "../ompp-mac/build"    $DEPLOY_DIR/ompp-mac/
 do_cmd cp -pr "../ompp-mac/pictures" $DEPLOY_DIR/ompp-mac/
 
 # MacOS: cleanup
