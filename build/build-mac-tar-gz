@@ -246,6 +246,8 @@ do_cmd find $DEPLOY_DIR -name "._*" -delete
 # end of MacOS
 #
 
+# build completed
+
 echo Build completed on:  ${OM_DATE_STAMP:0:4}-${OM_DATE_STAMP:4:2}-${OM_DATE_STAMP:6:2} > $DEPLOY_DIR/build_date.txt
 
 popd
