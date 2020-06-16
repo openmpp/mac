@@ -106,8 +106,7 @@ do_cmd cp -pr use      $DEPLOY_DIR
 # MacOS
 #
 
-do_cmd cp -p etc/runMacOS.Debug.template.txt   $DEPLOY_DIR/etc/run.Debug.template.txt
-# do_cmd cp -p etc/mpiLinux.openMPI.template.txt $DEPLOY_DIR/etc/mpi.ModelRun.template.txt
+do_cmd cp -p etc/runMacOS.Debug.template.txt $DEPLOY_DIR/etc/run.Debug.template.txt
 
 #
 # end of MacOS
