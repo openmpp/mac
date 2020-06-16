@@ -99,6 +99,7 @@ do_cmd cp -pr Perl     $DEPLOY_DIR
 do_cmd cp -pr props    $DEPLOY_DIR
 do_cmd cp -pr sql      $DEPLOY_DIR
 do_cmd cp -pr use      $DEPLOY_DIR
+do_cmd cp -pr Xcode    $DEPLOY_DIR
 
 # copy template files to run models
 
