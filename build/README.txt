@@ -5,7 +5,7 @@ Requirements:
   Bison version 2.7, for example from Homebrew: brew install bison@2.7
   Go fresh version, for example: https://dl.google.com/go/go1.14.3.darwin-amd64.pkg
   Node.js fresh version, for example: https://nodejs.org/dist/v12.17.0/node-v12.17.0.pkg
-  R fresh version (not tested with 4 yet), for example: https://cran.r-project.org/bin/macosx/R-3.6.3.nn.pkg
+  R fresh 3+ version (v4+ not tested yet), for example: https://cran.r-project.org/bin/macosx/R-3.6.3.nn.pkg
 
 To build openM++ release for MacOS:
 
