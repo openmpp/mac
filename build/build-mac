@@ -29,15 +29,9 @@ do_cmd()
 
 # get build scripts
 
-if [ ! -d mac ]; then
-  do_cmd mkdir mac
-fi
-
-if [ ! -d mac/ompp-mac ]; then
-  pushd mac
+if [ ! -d ompp-mac ]; then
   do_cmd git clone https://github.com/openmpp/mac.git ompp-mac
   do_cmd chmod a+x "ompp-mac/build/build-*"
-  popd
   do_cmd cp -pv \
     ompp-mac/build/build-openm \
     ompp-mac/build/build-models \
