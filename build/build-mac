@@ -13,7 +13,7 @@ export LDFLAGS="-L/usr/local/opt/${OMC_BISON}/lib ${LDFLAGS}"
 
 # set GOPATH to openM++ Go sources
 #
-export GOPATH=${PWD}/ompp/ompp-go
+export GOPATH=${PWD}/ompp
 
 # execute command, echo results and exit on errors
 do_cmd()
@@ -49,6 +49,4 @@ fi
 ./build-r && \
 ./build-ui && \
 ./build-mac-tar-gz
-
-
 

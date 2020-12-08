@@ -31,13 +31,14 @@ echo `date` Build Go oms web-service and dbcopy utility | tee log/build-go.log
 
 if [ ! -d ompp-go ]; then
   
-  echo mkdir ompp-go | tee -a log/build-go.log
-
-  if ! mkdir ompp-go >> log/build-go.log 2>&1;
+  if ! git clone https://github.com/openmpp/go ompp-go >> log/build-go.log 2>&1;
   then
-    echo FAILED | tee -a log/build-go.log
+    echo FAILED git clone | tee -a log/build-go.log
     exit 1
   fi
+
+else
+  echo Skip: git clone
 fi
 
 pushd ompp-go
