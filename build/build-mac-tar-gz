@@ -151,10 +151,12 @@ do_cmd mkdir $DEPLOY_DIR/ompp-docker
 do_cp_all ompp-docker $DEPLOY_DIR/ompp-docker
 
 do_cmd cp -pr ompp-docker/ompp-build-win      $DEPLOY_DIR/ompp-docker
+do_cmd cp -pr ompp-docker/ompp-build-win-2004 $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-build-win-1909 $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-build-win-1903 $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-build-win-1809 $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-run-win        $DEPLOY_DIR/ompp-docker
+do_cmd cp -pr ompp-docker/ompp-run-win-2004   $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-run-win-1909   $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-run-win-1903   $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-run-win-1809   $DEPLOY_DIR/ompp-docker
@@ -222,6 +224,10 @@ for M in $OM_BLD_MDLS; do
   for F in models/sql/${M}_*.sql; do [ -e $F ] && do_cmd cp -p $F $DEPLOY_DIR/models/sql; done
   
 done
+
+if [ ! -d $DEPLOY_DIR/models/Alpha2 ]; then
+  do_cmd cp -pr models/Alpha2 $DEPLOY_DIR/models/
+fi
 
 #
 # MacOS
