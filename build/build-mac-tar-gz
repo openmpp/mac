@@ -90,7 +90,6 @@ echo Copy files: | tee -a log/build-tar-gz.log
 
 do_cp_all . $DEPLOY_DIR
 
-do_cmd cp -pr etc      $DEPLOY_DIR
 do_cmd cp -pr Excel    $DEPLOY_DIR
 do_cmd cp -pr include  $DEPLOY_DIR
 do_cmd cp -pr licenses $DEPLOY_DIR
@@ -100,18 +99,6 @@ do_cmd cp -pr props    $DEPLOY_DIR
 do_cmd cp -pr sql      $DEPLOY_DIR
 do_cmd cp -pr use      $DEPLOY_DIR
 do_cmd cp -pr Xcode    $DEPLOY_DIR
-
-# copy template files to run models
-
-#
-# MacOS
-#
-
-do_cmd cp -p etc/runMacOS.Debug.template.txt $DEPLOY_DIR/etc/run.Debug.template.txt
-
-#
-# end of MacOS
-#
 
 # copy openm bin directory
 
@@ -139,6 +126,20 @@ do_cmd cp -pr ompp-go/dbcopy   $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/ompp     $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/oms      $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/licenses $DEPLOY_DIR/ompp-go
+
+# copy template files to run models
+
+do_cmd cp -pr ompp-go/etc $DEPLOY_DIR
+
+#
+# MacOS
+#
+
+do_cmd cp -p ompp-go/etc/runMacOS.Debug.template.txt $DEPLOY_DIR/etc/run.Debug.template.txt
+
+#
+# end of MacOS
+#
 
 # get Docker source code from git and copy Docker sources
 
