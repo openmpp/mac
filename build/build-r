@@ -38,19 +38,35 @@ else
   echo Skip: git clone
 fi
 
-# build openMpp R package
+# download latest release of openMpp R package
 
 pushd ompp-r
 
-echo R CMD build openMpp | tee -a ../log/build-r.log
+echo download latest release of openMpp R package | tee -a ../log/build-r.log
 
-if ! R CMD build openMpp >> ../log/build-r.log 2>&1;
+export OMPP_R_VER=0.8.5
+  
+if ! curl -L -o openMpp_${OMPP_R_VER}.tar.gz hopenMpp_0.8.5.tar.gz https://github.com/openmpp/R/releases/download/0.8.5/openMpp_${OMPP_R_VER}.tar.gz >> ../log/build-r.log 2>&1;
 then
   echo FAILED | tee -a ../log/build-r.log
   exit 1
 fi
   
 popd
+
+# build openMpp R package
+#
+# pushd ompp-r
+#
+# echo R CMD build openMpp | tee -a ../log/build-r.log
+#
+# if ! R CMD build openMpp >> ../log/build-r.log 2>&1;
+# then
+#  echo FAILED | tee -a ../log/build-r.log
+#  exit 1
+# fi
+# 
+# popd
 
 echo `date` Done. | tee -a log/build-r.log
 popd
