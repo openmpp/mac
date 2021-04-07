@@ -199,10 +199,9 @@ do_cmd cp -pr ompp-ui/src      $DEPLOY_DIR/ompp-ui/src
 do_cmd mkdir -p $DEPLOY_DIR/models/bin
 do_cmd mkdir -p $DEPLOY_DIR/models/sql
 do_cmd mkdir -p $DEPLOY_DIR/models/log
+do_cmd mkdir -p $DEPLOY_DIR/models/home
 
 do_cp_all models $DEPLOY_DIR/models
-
-do_cmd cp -pr models/microdata $DEPLOY_DIR/models/microdata
 
 for M in $OM_BLD_MDLS; do
 
