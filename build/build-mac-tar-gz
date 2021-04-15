@@ -28,11 +28,12 @@ OM_ROOT=$PWD
 
 if [ ! -d log ]; then mkdir log; fi
 
-# get current date, UTC time zone and set archive name
+# get current date in UTC time zone, CPU architecture and set archive name
 
 OM_DATE_STAMP=`date -u +%Y%m%d`
+CPU_ARCH=`uname -m`
 
-DEPLOY_NAME=openmpp_mac${OM_SFX_MPI}_${OM_DATE_STAMP}
+DEPLOY_NAME=openmpp_mac${OM_SFX_MPI}_${CPU_ARCH}_${OM_DATE_STAMP}
 DEPLOY_DIR=../$DEPLOY_NAME
 DEPLOY_GZ=$DEPLOY_NAME.tar.gz
 
