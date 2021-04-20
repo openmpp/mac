@@ -44,9 +44,9 @@ pushd ompp-r
 
 echo download latest release of openMpp R package | tee -a ../log/build-r.log
 
-export OMPP_R_VER=0.8.5
-  
-curl -L -o openMpp_${OMPP_R_VER}.tar.gz https://github.com/openmpp/R/releases/download/0.8.5/openMpp_${OMPP_R_VER}.tar.gz
+export OMPP_R_VER=0.8.6
+
+curl -L -o openMpp_${OMPP_R_VER}.tar.gz https://github.com/openmpp/R/releases/download/${OMPP_R_VER}/openMpp_${OMPP_R_VER}.tar.gz
 if [ $? -ne 0 ];
 then
   echo FAILED to download openMpp R package: openMpp_${OMPP_R_VER}.tar.gz | tee -a ../log/build-r.log
