@@ -5,11 +5,44 @@
 
 set -e
 
+#
 # to build omc we need bison version >= 2.6 and <= 3.5
 #
-OMC_BISON=bison@2.7
-export PATH="/usr/local/opt/${OMC_BISON}/bin:${PATH}"
-export LDFLAGS="-L/usr/local/opt/${OMC_BISON}/lib ${LDFLAGS}"
+OMC_BISON_HOME_PATH=${HOME}/bison/bin
+OMC_BISON_HOME_LDFLAGS=${HOME}/bison/lib
+
+OMC_BISON_BREW=bison@2.7
+OMC_BISON_BREW_x86_PATH=/usr/local/opt/${OMC_BISON_BREW}/bin
+OMC_BISON_BREW_x86_LDFLAGS=/usr/local/opt/${OMC_BISON_BREW}/lib
+OMC_BISON_BREW_ARM64_PATH=/opt/homebrew/opt/${OMC_BISON_BREW}/bin
+OMC_BISON_BREW_ARM64_LDFLAGS=/opt/homebrew/opt/${OMC_BISON_BREW}/lib
+
+
+if [ -z ${PATH##*"bison"*} ] ; then
+
+  echo "Found bison in PATH"
+  
+elif [ -n "${OMC_BISON_HOME_PATH}" ] && [ -x "${OMC_BISON_HOME_PATH}/bison" ] ; then
+
+  echo "Found bison at ${OMC_BISON_HOME_PATH}"
+  export PATH="${OMC_BISON_HOME_PATH}:${PATH}"
+  export LDFLAGS="-L${OMC_BISON_HOME_LDFLAGS} ${LDFLAGS}"
+  
+elif [ -n "${OMC_BISON_BREW_x86_PATH}" ] && [ -x "${OMC_BISON_BREW_x86_PATH}/bison" ] ; then
+
+  echo "Found bison at ${OMC_BISON_BREW_x86_PATH}"
+  export PATH="${OMC_BISON_BREW_x86_PATH}:${PATH}"
+  export LDFLAGS="-L${OMC_BISON_BREW_x86_LDFLAGS} ${LDFLAGS}"
+
+elif [ -n "${OMC_BISON_BREW_ARM64_PATH}" ] && [ -x "${OMC_BISON_BREW_ARM64_PATH}/bison" ] ; then
+
+  echo "Found bison at ${OMC_BISON_BREW_ARM64_PATH}"
+  export PATH="${OMC_BISON_BREW_ARM64_PATH}:${PATH}"
+  export LDFLAGS="-L${OMC_BISON_BREW_ARM64_LDFLAGS} ${LDFLAGS}"
+
+else
+  echo "Using default bison"
+fi
 
 # set GOPATH to openM++ Go sources
 #
