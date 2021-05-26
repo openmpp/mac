@@ -75,6 +75,8 @@ fi;
 
 echo Create: include/libopenm/omVersion.h >> log/build-openm.log
 
+git show -s --date=short --format="#define OM_RUNTIME_VERSION \"%cd %H %d\"" `git rev-list --tags --max-count=1` | tee -a log/build-openm.log
+
 echo "/**"                         > include/libopenm/omVersion.h
 echo " * @file"                    >> include/libopenm/omVersion.h
 echo " * OpenM++: runtime version" >> include/libopenm/omVersion.h
@@ -88,12 +90,12 @@ echo "//"                          >> include/libopenm/omVersion.h
 
 echo "git show -s --date=short --format=...." >> log/build-openm.log
 
-if ! git show -s --date=short --format="#define OM_RUNTIME_VERSION \"%cd %H\"" >> include/libopenm/omVersion.h ;
+if ! git show -s --date=short --format="#define OM_RUNTIME_VERSION \"%cd %H %d\"" `git rev-list --tags --max-count=1` >> include/libopenm/omVersion.h ;
 then
-  echo FAILED git clone
+  echo FAILED git show -s --date=short --format=....
   exit 1
 fi
- 
+
 echo "//"                        >> include/libopenm/omVersion.h
 echo "#endif  // OM_H_VERSION_H" >> include/libopenm/omVersion.h
 
