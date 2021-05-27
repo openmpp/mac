@@ -71,11 +71,30 @@ else
   echo Build cluster version: using MPI >> log/build-openm.log
 fi;
 
+# find openM++ version commit and use commit tag, if tagged
+
+OM_RUNTIME_VERSION=`git log -n 1 --date=short --format="%cd %H"`
+if [ $? -ne 0 ];
+then
+  echo FAILED git log -n 1 --date=short --format=.... | tee -a log/build-openm.log
+  exit 1
+fi
+
+OM_LAST_TAG=`git log --tags -n 1 --date=short --format="%cd %H %S"`
+if [ $? -ne 0 ];
+then
+  echo FAILED git log --tags -n 1 --date=short --format=.... | tee -a log/build-openm.log
+  exit 1
+fi
+echo " OM_LAST_TAG        = $OM_LAST_TAG" >> log/build-openm.log
+
+[ "${OM_LAST_TAG:0:51}" = "$OM_RUNTIME_VERSION" ] && OM_RUNTIME_VERSION="$OM_LAST_TAG"
+
+echo " OM_RUNTIME_VERSION = $OM_RUNTIME_VERSION" | tee -a log/build-openm.log
+
 # create omVersion.h
 
 echo Create: include/libopenm/omVersion.h >> log/build-openm.log
-
-git show -s --date=short --format="#define OM_RUNTIME_VERSION \"%cd %H %d\"" `git rev-list --tags --max-count=1` | tee -a log/build-openm.log
 
 echo "/**"                         > include/libopenm/omVersion.h
 echo " * @file"                    >> include/libopenm/omVersion.h
@@ -88,13 +107,7 @@ echo "#ifndef OM_H_VERSION_H"      >> include/libopenm/omVersion.h
 echo "#define OM_H_VERSION_H"      >> include/libopenm/omVersion.h
 echo "//"                          >> include/libopenm/omVersion.h
 
-echo "git show -s --date=short --format=...." >> log/build-openm.log
-
-if ! git show -s --date=short --format="#define OM_RUNTIME_VERSION \"%cd %H %d\"" `git rev-list --tags --max-count=1` >> include/libopenm/omVersion.h ;
-then
-  echo FAILED git show -s --date=short --format=....
-  exit 1
-fi
+echo "#define OM_RUNTIME_VERSION \"$OM_RUNTIME_VERSION\"" >> include/libopenm/omVersion.h
 
 echo "//"                        >> include/libopenm/omVersion.h
 echo "#endif  // OM_H_VERSION_H" >> include/libopenm/omVersion.h
