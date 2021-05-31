@@ -55,19 +55,5 @@ fi
   
 popd
 
-# build openMpp R package
-#
-# pushd ompp-r
-#
-# echo R CMD build openMpp | tee -a ../log/build-r.log
-#
-# if ! R CMD build openMpp >> ../log/build-r.log 2>&1;
-# then
-#  echo FAILED | tee -a ../log/build-r.log
-#  exit 1
-# fi
-# 
-# popd
-
 echo `date` Done. | tee -a log/build-r.log
 popd
