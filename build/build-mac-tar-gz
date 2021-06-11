@@ -203,20 +203,23 @@ do_cmd mkdir -p $DEPLOY_DIR/models/home
 
 do_cp_all models $DEPLOY_DIR/models
 
+do_cmd cp -p models/bin/* $DEPLOY_DIR/models/bin
+do_cmd cp -p models/sql/* $DEPLOY_DIR/models/sql
+
 for M in $OM_BLD_MDLS; do
 
-  do_cmd cp -pr models/$M                  $DEPLOY_DIR/models/$M
-  do_cmd cp -pr models/bin/$M${OM_SFX_MPI} $DEPLOY_DIR/models/bin
-  do_cmd cp -p  models/bin/$M.sqlite       $DEPLOY_DIR/models/bin
+  do_cmd cp -pr models/$M $DEPLOY_DIR/models/$M
 
-  for F in models/bin/${M}.*ini; do [ -e $F ] && do_cmd cp -p $F $DEPLOY_DIR/models/bin; done
-  
-  for F in models/sql/${M}_*.sql; do [ -e $F ] && do_cmd cp -p $F $DEPLOY_DIR/models/sql; done
+  do_cmd rm -rf $DEPLOY_DIR/models/$M/ompp-linux
+  do_cmd rm -rf $DEPLOY_DIR/models/$M/ompp-mac
   
 done
 
 if [ ! -d $DEPLOY_DIR/models/Alpha2 ]; then
   do_cmd cp -pr models/Alpha2 $DEPLOY_DIR/models/
+
+  do_cmd rm -rf $DEPLOY_DIR/models/Alpha2/ompp-linux
+  do_cmd rm -rf $DEPLOY_DIR/models/Alpha2/ompp-mac
 fi
 
 #
