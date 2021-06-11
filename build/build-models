@@ -71,6 +71,16 @@ for C in ${OM_BLD_CFG//,/ }; do
   fi
 done
 
+# publish models into models/bin
+
+echo make $OM_P_RLS $OM_P_MPI publish-all
+
+if ! make $OM_P_RLS $OM_P_MPI publish-all >> ../log/build-models.log 2>&1;
+then
+  echo FAILED: make $OM_P_RLS $OM_P_MPI publish-all | tee -a ../log/build-models.log
+  exit 1
+fi
+
 popd
 
 echo `date` Done. | tee -a log/build-models.log
