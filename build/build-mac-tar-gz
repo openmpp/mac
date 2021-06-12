@@ -132,16 +132,25 @@ do_cmd cp -pr ompp-go/licenses $DEPLOY_DIR/ompp-go
 # copy template files to run models
 
 do_cmd mkdir $DEPLOY_DIR/etc
+do_cmd mkdir $DEPLOY_DIR/etc/scripts
 
 #
 # MacOS
 #
 
-do_cmd cp -p ompp-go/etc/runMacOS.Debug.template.txt $DEPLOY_DIR/etc/run.Debug.template.txt
+do_cmd cp -p ompp-go/etc/runLinuxMacOS.Debug.template.txt $DEPLOY_DIR/etc/run.Debug.template.txt
 
+# do_cmd cp -p ompp-go/etc/mpiLinux.openMPI.template.txt $DEPLOY_DIR/etc/mpi.ModelRun.template.txt
 #
 # end of MacOS
 #
+
+do_cmd cp -p ompp-go/etc/runLinuxMacOS.OzProj.template.txt          $DEPLOY_DIR/etc/run.OzProj.template.txt
+do_cmd cp -p ompp-go/etc/runLinuxMacOS.OzProj.Debug.template.txt    $DEPLOY_DIR/etc/run.OzProj.Debug.template.txt
+do_cmd cp -p ompp-go/etc/runLinuxMacOS.OzProjGen.template.txt       $DEPLOY_DIR/etc/run.OzProjGen.template.txt
+do_cmd cp -p ompp-go/etc/runLinuxMacOS.OzProjGen.Debug.template.txt $DEPLOY_DIR/etc/run.OzProjGen.Debug.template.txt
+
+do_cmd cp -p ompp-go/etc/scripts/*.sh $DEPLOY_DIR/etc/scripts
 
 # get Docker source code from git and copy Docker sources
 
@@ -220,6 +229,14 @@ if [ ! -d $DEPLOY_DIR/models/Alpha2 ]; then
 
   do_cmd rm -rf $DEPLOY_DIR/models/Alpha2/ompp-linux
   do_cmd rm -rf $DEPLOY_DIR/models/Alpha2/ompp-mac
+fi
+
+if [ -d $DEPLOY_DIR/models/OzProj ]; then
+  do_cmd mkdir -p $DEPLOY_DIR/models/OzProj/ompp/bin
+fi
+
+if [ -d $DEPLOY_DIR/models/OzProjGen ]; then
+  do_cmd mkdir -p $DEPLOY_DIR/models/OzProjGen/ompp/bin
 fi
 
 #
