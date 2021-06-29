@@ -4,9 +4,9 @@
 # environmemnt variables:
 #  OM_BUILD_CONFIGS=RELEASE,DEBUG (default: RELEASE)
 #  OM_MSG_USE=MPI                 (default: EMPTY)
-#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,NewTimeBased_bilingual,IDMM,OzProj,OzProjGen,RiskPaths
+#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,NewTimeBased_bilingual,IDMM,OzProj,OzProjGen,RiskPaths,RiskPaths_csv
 
-OM_BLD_MDLS=${MODEL_DIRS:-modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,NewTimeBased_bilingual,IDMM,OzProj,OzProjGen,RiskPaths}
+OM_BLD_MDLS=${MODEL_DIRS:-modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,NewTimeBased_bilingual,IDMM,OzProj,OzProjGen,RiskPaths,RiskPaths_csv}
 
 OM_BLD_CFG=${OM_BUILD_CONFIGS:-RELEASE}
 
