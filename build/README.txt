@@ -45,3 +45,15 @@ To create openmpp_mac_YYYYMMDD.tar.gz archive:
   ./build-mac-tar-gz
   
   Environment variables to control "build-mac-tar-gz": MODEL_DIRS
+
+To sign executables and prepare notarization archive:
+
+  export BUNDLE_VERSION=0.0.1
+  export DEV_APP_USER_ID=ABCDEFGHIJ
+  ./sign-bundle.sh
+
+To rebuild openmpp_mac_YYYYMMDD.tar.gz archive with notarized executables:
+
+  export BUNDLE_VERSION=0.0.1
+  export DEPLOY_DIR=openmpp_mac_x86_64_20210629
+  ./rebuild-tar-gz.sh
