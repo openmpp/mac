@@ -165,8 +165,10 @@ do_cp_all ompp-docker $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-build-win      $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-run-win        $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-build-debian   $DEPLOY_DIR/ompp-docker
+do_cmd cp -pr ompp-docker/ompp-build-ubuntu   $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-build-centos   $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-run-debian     $DEPLOY_DIR/ompp-docker
+do_cmd cp -pr ompp-docker/ompp-run-ubuntu     $DEPLOY_DIR/ompp-docker
 do_cmd cp -pr ompp-docker/ompp-run-centos     $DEPLOY_DIR/ompp-docker
 
 # get Python source code from git and copy Python sources
