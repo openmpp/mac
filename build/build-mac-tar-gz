@@ -132,7 +132,6 @@ do_cmd cp -pr ompp-go/licenses $DEPLOY_DIR/ompp-go
 # copy template files to run models
 
 do_cmd mkdir $DEPLOY_DIR/etc
-do_cmd mkdir $DEPLOY_DIR/etc/scripts
 
 #
 # MacOS
