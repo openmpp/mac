@@ -207,8 +207,8 @@ do_cmd mkdir -p $DEPLOY_DIR/models/home/out/download
 
 do_cp_all models $DEPLOY_DIR/models
 
-do_cmd cp -p models/bin/* $DEPLOY_DIR/models/bin
-do_cmd cp -p models/sql/* $DEPLOY_DIR/models/sql
+do_cmd cp -pr models/bin/* $DEPLOY_DIR/models/bin
+do_cmd cp -p  models/sql/* $DEPLOY_DIR/models/sql
 
 for M in $OM_BLD_MDLS; do
 
