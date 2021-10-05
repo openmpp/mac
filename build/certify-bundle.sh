@@ -11,6 +11,7 @@
 # export DEV_APP_USER_ID=ABCDEFGHIJ
 # export DEV_APP_EMAIL=my-email@some-where.mail
 # export DEV_APP_KEYCHAIN=altool-app-pwd-key
+# export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,NewTimeBased_bilingual,IDMM,RiskPaths,RiskPaths_csv
 #
 
 if [ -z "$DEPLOY_DIR" ]; then
@@ -38,6 +39,10 @@ if [ -z "$DEV_APP_KEYCHAIN" ]; then
   exit 1
 fi
 
+[ -n "$MODEL_COPY_NAMES" ] && \
+  OM_COPY_MDLS=${MODEL_COPY_NAMES//,/ } || \
+  OM_COPY_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual NewTimeBased_bilingual IDMM RiskPaths RiskPaths_csv"
+
 BUNDLE_DIR=bundle-$BUNDLE_VERSION
 
 echo " DEPLOY_DIR       = $DEPLOY_DIR"
@@ -46,6 +51,7 @@ echo " BUNDLE_VERSION   = $BUNDLE_VERSION"
 echo " DEV_APP_USER_ID  = $DEV_APP_USER_ID"
 echo " DEV_APP_EMAIL    = $DEV_APP_EMAIL"
 echo " DEV_APP_KEYCHAIN = $DEV_APP_KEYCHAIN"
+echo " MODEL_COPY_NAMES = $OM_COPY_MDLS"
 
 # execute command and exit on errors
 #
@@ -146,12 +152,16 @@ do_cmd cp -pv $BUNDLE_DIR/omc    $DEPLOY_DIR/bin/
 do_cmd cp -pv $BUNDLE_DIR/oms    $DEPLOY_DIR/bin/
 do_cmd cp -pv $BUNDLE_DIR/dbcopy $DEPLOY_DIR/bin/
 
-do_cmd cp -pv $BUNDLE_DIR/* $DEPLOY_DIR/models/bin/
+for M in $OM_COPY_MDLS; do
 
-do_cmd rm -v $DEPLOY_DIR/models/bin/omc
-do_cmd rm -v $DEPLOY_DIR/models/bin/oms
-do_cmd rm -v $DEPLOY_DIR/models/bin/dbcopy
-do_cmd rm -v $DEPLOY_DIR/models/bin/img.zip
+  do_cmd cp -pv $BUNDLE_DIR/$M $DEPLOY_DIR/models/bin/
+
+done
+
+# copy OzProj models
+
+do_cmd cp -pv $BUNDLE_DIR/OzProj    $DEPLOY_DIR/models/bin/OzProj/ompp/bin/
+do_cmd cp -pv $BUNDLE_DIR/OzProjGen $DEPLOY_DIR/models/bin/OzProjGen/ompp/bin/
 
 # MacOS: cleanup
 
