@@ -6,16 +6,15 @@
 set -e
 
 #
-# to build omc we need bison version >= 2.6 and <= 3.5
+# to build omc we need bison version >= 3.3
 #
 OMC_BISON_HOME_PATH=${HOME}/bison/bin
 OMC_BISON_HOME_LDFLAGS=${HOME}/bison/lib
 
-OMC_BISON_BREW=bison@2.7
-OMC_BISON_BREW_x86_PATH=/usr/local/opt/${OMC_BISON_BREW}/bin
-OMC_BISON_BREW_x86_LDFLAGS=/usr/local/opt/${OMC_BISON_BREW}/lib
-OMC_BISON_BREW_ARM64_PATH=/opt/homebrew/opt/${OMC_BISON_BREW}/bin
-OMC_BISON_BREW_ARM64_LDFLAGS=/opt/homebrew/opt/${OMC_BISON_BREW}/lib
+OMC_BISON_BREW_x86_PATH=/usr/local/opt/bison/bin
+OMC_BISON_BREW_x86_LDFLAGS=/usr/local/opt/bison/lib
+OMC_BISON_BREW_ARM64_PATH=/opt/homebrew/opt/bison/bin
+OMC_BISON_BREW_ARM64_LDFLAGS=/opt/homebrew/opt/bison/lib
 
 
 if [ -z ${PATH##*"bison"*} ] ; then
