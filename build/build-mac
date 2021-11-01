@@ -16,8 +16,7 @@ OMC_BISON_BREW_x86_LDFLAGS=/usr/local/opt/bison/lib
 OMC_BISON_BREW_ARM64_PATH=/opt/homebrew/opt/bison/bin
 OMC_BISON_BREW_ARM64_LDFLAGS=/opt/homebrew/opt/bison/lib
 
-
-if [ -z ${PATH##*"bison"*} ] ; then
+if [ -z "${PATH##*bison*}" ] ; then
 
   echo "Found bison in PATH"
   
