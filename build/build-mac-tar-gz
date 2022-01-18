@@ -137,9 +137,10 @@ do_cmd mkdir $DEPLOY_DIR/etc
 # MacOS
 #
 
-do_cmd cp -p ompp-go/etc/runLinuxMacOS.Debug.template.txt $DEPLOY_DIR/etc/run.Debug.template.txt
+do_cmd cp -p ompp-go/etc/run-Linux-MacOS.Debug.template.txt        $DEPLOY_DIR/etc/run.Debug.template.txt
+do_cmd cp -p ompp-go/etc/run-options.any_model.1.Use_Defaults.json $DEPLOY_DIR/etc/
 
-# do_cmd cp -p ompp-go/etc/mpiLinux.openMPI.template.txt $DEPLOY_DIR/etc/mpi.ModelRun.template.txt
+# do_cmd cp -p ompp-go/etc/mpi-Linux-openMPI.ModelRun.template.txt   $DEPLOY_DIR/etc/mpi.ModelRun.template.txt
 #
 # end of MacOS
 #
