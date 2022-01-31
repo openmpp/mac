@@ -3,7 +3,7 @@
 # create zip archive of openM++ build from ompp sub-directory: openmpp_mac_YYYYMMDD.tar.gz
 # environmemnt variables:
 #  OM_MSG_USE=MPI                 (default: EMPTY)
-#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,NewTimeBased_bilingual,IDMM,OzProj,OzProjGen,RiskPaths,RiskPaths_csv
+#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,OzProj,OzProjGen,RiskPaths
 
 if [ -n "$OM_MSG_USE" ] && [ "$OM_MSG_USE" != 'EMPTY' ] && [ "$OM_MSG_USE" != 'MPI' ]; then
   echo Error: incorrect value: $OM_MSG_USE, must be one of: MPI or EMPTY
@@ -14,7 +14,7 @@ fi
 
 [ -n "$MODEL_DIRS" ] && \
   OM_BLD_MDLS=${MODEL_DIRS//,/ } || \
-  OM_BLD_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual NewTimeBased_bilingual IDMM OzProj OzProjGen RiskPaths RiskPaths_csv"
+  OM_BLD_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual IDMM OzProj OzProjGen RiskPaths"
 
 # push into ompp root and make log directory if not exist
 
@@ -220,12 +220,18 @@ for M in $OM_BLD_MDLS; do
   
 done
 
-if [ ! -d $DEPLOY_DIR/models/Alpha2 ]; then
-  do_cmd cp -pr models/Alpha2 $DEPLOY_DIR/models/
+# copy additional models source code
 
-  do_cmd rm -rf $DEPLOY_DIR/models/Alpha2/ompp-linux
-  do_cmd rm -rf $DEPLOY_DIR/models/Alpha2/ompp-mac
-fi
+for M in Alpha2 NewTimeBased_bilingual NewCaseBased_weighted OzProj_extra RiskPaths_csv; do
+
+  if [ ! -d $DEPLOY_DIR/models/$M ]; then
+
+    do_cmd cp -pr models/$M $DEPLOY_DIR/models/
+
+    do_cmd rm -rf $DEPLOY_DIR/models/$M/ompp-linux
+    do_cmd rm -rf $DEPLOY_DIR/models/$M/ompp-mac
+  fi
+done
 
 #
 # MacOS
