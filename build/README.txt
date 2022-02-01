@@ -16,7 +16,7 @@ To build openM++ release for MacOS:
 
 Environment variables:
   OM_BUILD_CONFIGS=RELEASE,DEBUG # default: RELEASE,DEBUG for libraries and RELEASE for models
-  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,OzProj,OzProjGen,RiskPaths
+  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths
 
 Examples:
   MODEL_DIRS=RiskPaths,IDMM ./build-mac  # include only RiskPaths,IDMM models
