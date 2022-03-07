@@ -44,7 +44,7 @@ pushd ompp-r
 
 echo download latest release of openMpp R package | tee -a ../log/build-r.log
 
-export OMPP_R_VER=0.8.6
+export OMPP_R_VER=0.8.7
 
 curl -L -o openMpp_${OMPP_R_VER}.tar.gz https://github.com/openmpp/R/releases/download/${OMPP_R_VER}/openMpp_${OMPP_R_VER}.tar.gz
 if [ $? -ne 0 ];
