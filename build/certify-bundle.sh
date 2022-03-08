@@ -11,7 +11,7 @@
 # export DEV_APP_USER_ID=ABCDEFGHIJ
 # export DEV_APP_EMAIL=my-email@some-where.mail
 # export DEV_APP_KEYCHAIN=altool-app-pwd-key
-# export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths
+# export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProj,OzProjGen
 #
 
 if [ -z "$DEPLOY_DIR" ]; then
@@ -41,7 +41,7 @@ fi
 
 [ -n "$MODEL_COPY_NAMES" ] && \
   OM_COPY_MDLS=${MODEL_COPY_NAMES//,/ } || \
-  OM_COPY_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual IDMM RiskPaths"
+  OM_COPY_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual IDMM RiskPaths OzProj OzProjGen"
 
 BUNDLE_DIR=bundle-$BUNDLE_VERSION
 
