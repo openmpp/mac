@@ -11,7 +11,7 @@
 # export DEV_APP_USER_ID=ABCDEFGHIJ
 # export DEV_APP_EMAIL=my-email@some-where.mail
 # export DEV_APP_KEYCHAIN=altool-app-pwd-key
-# export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProj,OzProjGen
+# export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths
 #
 
 if [ -z "$DEPLOY_DIR" ]; then
@@ -41,7 +41,7 @@ fi
 
 [ -n "$MODEL_COPY_NAMES" ] && \
   OM_COPY_MDLS=${MODEL_COPY_NAMES//,/ } || \
-  OM_COPY_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual IDMM RiskPaths OzProj OzProjGen"
+  OM_COPY_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual IDMM RiskPaths"
 
 BUNDLE_DIR=bundle-$BUNDLE_VERSION
 
@@ -157,6 +157,11 @@ for M in $OM_COPY_MDLS; do
   do_cmd cp -pv $BUNDLE_DIR/$M $DEPLOY_DIR/models/bin/
 
 done
+
+# copy OzProj models
+
+do_cmd cp -pv $BUNDLE_DIR/OzProj    $DEPLOY_DIR/models/bin/OzProj/ompp/bin/
+do_cmd cp -pv $BUNDLE_DIR/OzProjGen $DEPLOY_DIR/models/bin/OzProjGen/ompp/bin/
 
 # MacOS: cleanup
 
