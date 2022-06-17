@@ -184,6 +184,8 @@ do_cmd mkdir $DEPLOY_DIR/ompp-r
 do_cp_all ompp-r $DEPLOY_DIR/ompp-r
 
 do_cmd cp -pr ompp-r/openMpp $DEPLOY_DIR/ompp-r
+do_cmd cp -pr ompp-r/oms-R   $DEPLOY_DIR/ompp-r
+do_cmd cp -pr ompp-r/images  $DEPLOY_DIR/ompp-r
 
 # copy UI html build and source code
 
