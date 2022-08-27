@@ -54,8 +54,8 @@ do_go_cmd()
   fi
 }
 
-do_go_cmd get github.com/openmpp/go/dbcopy
-do_go_cmd get github.com/openmpp/go/oms
+do_go_cmd install ./dbcopy
+do_go_cmd install ./oms
 
 popd
 
