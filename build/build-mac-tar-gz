@@ -128,6 +128,8 @@ do_cmd cp -pr ompp-go/ompp     $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/oms      $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/etc      $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/licenses $DEPLOY_DIR/ompp-go
+do_cmd cp -pr ompp-go/job      $DEPLOY_DIR/ompp-go
+do_cmd cp -pr ompp-go/models   $DEPLOY_DIR/ompp-go
 
 # copy template files to run models
 
