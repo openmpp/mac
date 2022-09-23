@@ -46,7 +46,7 @@ echo " OM_MSG_USE         = $OM_MSG_USE" | tee -a log/build-models.log
 echo " OM_ROOT            = $OM_ROOT" | tee -a log/build-models.log 
 echo " MODEL_DIRS         = $MODEL_DIRS" | tee -a log/build-models.log 
 echo Build configurations: $OM_BLD_CFG | tee -a log/build-models.log 
-if [ -z $OM_P_MPI ]; then
+if [ -z "$OM_P_MPI" ]; then
   echo Build desktop version: non-MPI | tee -a log/build-models.log 
 else
   echo Build cluster version: using MPI | tee -a log/build-models.log 

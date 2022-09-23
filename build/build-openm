@@ -29,7 +29,7 @@ echo Environment:
 echo " OM_BUILD_CONFIGS   = $OM_BUILD_CONFIGS"
 echo " OM_MSG_USE         = $OM_MSG_USE"
 echo Build configurations: $OM_BLD_CFG
-if [ -z $OM_P_MPI ]; then
+if [ -z "$OM_P_MPI" ]; then
   echo Build desktop version: non-MPI
 else
   echo Build cluster version: using MPI
@@ -65,7 +65,7 @@ echo " OM_BUILD_CONFIGS   = $OM_BUILD_CONFIGS" >> log/build-openm.log
 echo " OM_MSG_USE         = $OM_MSG_USE" >> log/build-openm.log
 echo " OM_ROOT            = $OM_ROOT" >> log/build-openm.log
 echo Build configurations: $OM_BLD_CFG >> log/build-openm.log
-if [ -z $OM_P_MPI ]; then
+if [ -z "$OM_P_MPI" ]; then
   echo Build desktop version: non-MPI >> log/build-openm.log
 else
   echo Build cluster version: using MPI >> log/build-openm.log

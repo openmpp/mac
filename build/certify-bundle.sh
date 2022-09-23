@@ -6,8 +6,8 @@
 # copy certified executables from bundle directory into deploy directory
 # create .tar.gz archive from existing deploy directory: openmpp_mac_ARCH_YYYYMMDD
 #
-# export DEPLOY_DIR=openmpp_mac_x86_64_20210629
 # export BUNDLE_VERSION=0.0.1
+# export DEPLOY_DIR=openmpp_mac_x86_64_20210629
 # export DEV_APP_USER_ID=ABCDEFGHIJ
 # export DEV_APP_EMAIL=my-email@some-where.mail
 # export DEV_APP_KEYCHAIN=altool-app-pwd-key

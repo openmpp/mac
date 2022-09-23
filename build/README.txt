@@ -16,10 +16,12 @@ To build openM++ release for MacOS:
 
 Environment variables:
   OM_BUILD_CONFIGS=RELEASE,DEBUG # default: RELEASE,DEBUG for libraries and RELEASE for models
+  OM_DATE_STAMP=20220817         # default: current date as YYYYMMDD
   MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProj,OzProjGen
 
 Examples:
   MODEL_DIRS=RiskPaths,IDMM ./build-mac  # include only RiskPaths,IDMM models
+  OM_DATE_STAMP=20220817    ./build-mac  # archive name openmpp_mac_x86_64_20220817.tar.gz
   OM_BUILD_CONFIGS=RELEASE  ./build-mac  # include only RELEASE executables and libs
 
 To build openM++ libraries and omc compiler do:
@@ -44,16 +46,16 @@ To create openmpp_mac_YYYYMMDD.tar.gz archive:
 
   ./build-mac-tar-gz
   
-  Environment variables to control "build-mac-tar-gz": MODEL_DIRS
+  Environment variables to control "build-mac-tar-gz": MODEL_DIRS, OM_DATE_STAMP
 
-To sign executables and prepare notarization archive:
+To sign executables and notarize archive:
 
-  export BUNDLE_VERSION=0.0.1
   export DEV_APP_USER_ID=ABCDEFGHIJ
-  ./sign-bundle.sh
-
-To rebuild openmpp_mac_YYYYMMDD.tar.gz archive with notarized executables:
+  export DEV_APP_EMAIL=my-email@some-where.mail
+  export DEV_APP_KEYCHAIN=altool-app-pwd-key
 
   export BUNDLE_VERSION=0.0.1
   export DEPLOY_DIR=openmpp_mac_x86_64_20210629
-  ./rebuild-tar-gz.sh
+  export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths
+
+  ./certify-bundle.sh
