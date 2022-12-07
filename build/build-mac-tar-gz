@@ -230,7 +230,7 @@ done
 
 # copy additional models source code
 
-for M in Alpha2 NewTimeBased_bilingual NewCaseBased_weighted OzProj OzProjGen OzProj_extra RiskPaths_csv; do
+for M in Align1 Alpha2 NewTimeBased_bilingual NewCaseBased_weighted OzProj_extra RiskPaths_csv PA1; do
 
   if [ ! -d $DEPLOY_DIR/models/$M ]; then
 
