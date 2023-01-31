@@ -200,7 +200,6 @@ do_cmd mkdir $DEPLOY_DIR/ompp-ui
 
 do_cp_all ompp-ui $DEPLOY_DIR/ompp-ui
 
-do_cmd cp -pr ompp-ui/.quasar  $DEPLOY_DIR/ompp-ui/.quasar
 do_cmd cp -pr ompp-ui/.vscode  $DEPLOY_DIR/ompp-ui/.vscode
 do_cmd cp -pr ompp-ui/licenses $DEPLOY_DIR/ompp-ui/licenses
 do_cmd cp -pr ompp-ui/public   $DEPLOY_DIR/ompp-ui/public
