@@ -56,6 +56,7 @@ fi;
 
 pushd models
 
+export MODEL_INI="${OM_ROOT}/../model.ini"
 export MODEL_DIRS="${OM_BLD_MDLS//,/ }"
 
 for C in ${OM_BLD_CFG//,/ }; do

@@ -70,7 +70,8 @@ if [ ! -d ompp-mac ]; then
     ompp-mac/build/build-r \
     ompp-mac/build/build-ui \
     ompp-mac/build/certify-bundle.sh \
-    ompp-mac/build/build-mac-tar-gz .
+    ompp-mac/build/build-mac-tar-gz \
+    ompp-mac/build/model.ini .
 fi
 
 # do build 
