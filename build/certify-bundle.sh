@@ -9,8 +9,6 @@
 # export BUNDLE_VERSION=0.0.1
 # export DEPLOY_DIR=openmpp_mac_x86_64_20210629
 # export DEV_APP_USER_ID=ABCDEFGHIJ
-# export DEV_APP_EMAIL=my-email@some-where.mail
-# export DEV_APP_KEYCHAIN=altool-app-pwd-key
 # export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths
 #
 
@@ -30,14 +28,6 @@ if [ -z "$DEV_APP_USER_ID" ]; then
   echo ERROR: undefined DEV_APP_USER_ID
   exit 1
 fi
-if [ -z "$DEV_APP_EMAIL" ]; then
-  echo ERROR: undefined DEV_APP_EMAIL
-  exit 1
-fi
-if [ -z "$DEV_APP_KEYCHAIN" ]; then
-  echo ERROR: undefined DEV_APP_KEYCHAIN
-  exit 1
-fi
 
 [ -n "$MODEL_COPY_NAMES" ] && \
   OM_COPY_MDLS=${MODEL_COPY_NAMES//,/ } || \
@@ -49,8 +39,6 @@ echo " DEPLOY_DIR       = $DEPLOY_DIR"
 echo " BUNDLE_DIR       = $BUNDLE_DIR"
 echo " BUNDLE_VERSION   = $BUNDLE_VERSION"
 echo " DEV_APP_USER_ID  = $DEV_APP_USER_ID"
-echo " DEV_APP_EMAIL    = $DEV_APP_EMAIL"
-echo " DEV_APP_KEYCHAIN = $DEV_APP_KEYCHAIN"
 echo " MODEL_COPY_NAMES = $OM_COPY_MDLS"
 
 # execute command and exit on errors
@@ -89,62 +77,29 @@ popd
 
 # submit to Apple
 
-echo xcrun altool \
-  --notarize-app \
-  --primary-bundle-id "org.openmpp.img-${BUNDLE_VERSION}" \
-  -u "${DEV_APP_EMAIL}" \
-  -p "@keychain:${DEV_APP_KEYCHAIN}" \
-  -f ${BUNDLE_DIR}/img.zip
+echo xcrun notarytool submit ${BUNDLE_DIR}/img.zip --keychain-profile "notary-tool" --wait
 
-if ! xcrun altool \
-  --notarize-app \
-  --primary-bundle-id "org.openmpp.img-${BUNDLE_VERSION}" \
-  -u "${DEV_APP_EMAIL}" \
-  -p "@keychain:${DEV_APP_KEYCHAIN}" \
-  -f ${BUNDLE_DIR}/img.zip > altool.submit.txt 2>&1;
+if ! xcrun notarytool submit ${BUNDLE_DIR}/img.zip --keychain-profile "notary-tool" --wait > notarytool.submit.txt 2>&1;
 then
   echo FAILED.
-  cat altool.submit.txt
+  cat notarytool.submit.txt
   exit 1
 fi
 
-# wait for Apple response
+# analyze response:
+#
+# Processing complete
+#   id: 5940c789-fa3b-45e7-8527-f1fc0119c390
+#   status: Accepted
 
-rq_uuid=`cat altool.submit.txt | grep -Eo '\w{8}-(\w{4}-){3}\w{12}$'`
+echo "sed -n '/Processing complete/{n;p;n;p;}' notarytool.submit.txt | grep 'status: Accepted'"
 
-echo request UIUID: $rq_uuid
-if [ -z "$rq_uuid" ]; then
-  echo " FAILED."
+if ! sed -n '/Processing complete/{n;p;n;p;}' notarytool.submit.txt | grep 'status: Accepted' 2>&1 ;
+then
+  echo FAILED.
+  cat notarytool.submit.txt
   exit 1
 fi
-
-while true; do
-  echo -n "."
-  sleep 20
- 
-  if ! xcrun altool --notarization-info "$rq_uuid" -u "${DEV_APP_EMAIL}" -p "@keychain:${DEV_APP_KEYCHAIN}" > altool.wait.txt 2>&1;
-  then
-    echo FAILED xcrun altool --notarization-info "$rq_uuid" -u "${DEV_APP_EMAIL}" -p "@keychain:${DEV_APP_KEYCHAIN}"
-    echo "$w_txt"
-    exit 1
-  fi
-
-  w_txt=`cat altool.wait.txt`
-  ok_rsp=`echo "$w_txt" | grep "success"`
-  not_rsp=`echo "$w_txt" | grep "invalid"`
-  if [ -n "$ok_rsp" ]; then
-    echo " OK."
-    echo "$w_txt"
-    echo " OK."
-    break
-  fi
-  if [ -n "$not_rsp" ]; then
-    echo " FAILED."
-    echo "$w_txt"
-    exit 1
-  fi
-
-done
 
 # copy certified executables into deploy directory
 
