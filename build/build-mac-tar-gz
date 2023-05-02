@@ -192,6 +192,19 @@ do_cmd cp -pr ompp-r/openMpp $DEPLOY_DIR/ompp-r
 do_cmd cp -pr ompp-r/oms-R   $DEPLOY_DIR/ompp-r
 do_cmd cp -pr ompp-r/images  $DEPLOY_DIR/ompp-r
 
+# copy additional sources from openmpp/other repository
+
+if [ ! -d ompp-other ]; then
+  do_cmd git clone https://github.com/openmpp/other ompp-other
+fi
+
+do_cmd mkdir $DEPLOY_DIR/ompp-other
+
+do_cp_all ompp-other $DEPLOY_DIR/ompp-other
+
+do_cmd cp -pr ompp-other/azure_cloud  $DEPLOY_DIR/ompp-other/azure_cloud
+do_cmd cp -pr ompp-other/google_cloud $DEPLOY_DIR/ompp-other/google_cloud
+
 # copy UI html build and source code
 
 do_cmd cp -pr ompp-ui/dist/spa   $DEPLOY_DIR/html
