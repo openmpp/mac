@@ -54,8 +54,8 @@ do_go_cmd()
   fi
 }
 
-do_go_cmd install ./dbcopy
-do_go_cmd install ./oms
+do_go_cmd install -tags sqlite_math_functions,sqlite_omit_load_extension ./dbcopy
+do_go_cmd install -tags sqlite_math_functions,sqlite_omit_load_extension ./oms
 
 popd
 

@@ -31,7 +31,7 @@ if [ ! -d log ]; then mkdir log; fi
 
 # get current date in UTC time zone, CPU architecture and set archive name
 
-[ -n "$OM_DATE_STAMP" ] || OM_DATE_STAMP=`date -u +%Y%m%d`
+[ -n "$OM_DATE_STAMP" ] || OM_DATE_STAMP=`date +%Y%m%d`
 
 CPU_ARCH=`uname -m`
 
