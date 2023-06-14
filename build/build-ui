@@ -56,6 +56,7 @@ do_npm_cmd()
 }
 
 export npm_config_cache=$OM_ROOT/build/npm-cache
+export NODE_OPTIONS=--openssl-legacy-provider
 
 do_npm_cmd install
 do_npm_cmd run build
