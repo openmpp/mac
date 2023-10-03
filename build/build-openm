@@ -80,7 +80,7 @@ then
   exit 1
 fi
 
-OM_LAST_TAG=`git log --tags -n 1 --date=short --format="%cd %H %S"`
+OM_LAST_TAG=`git log --tags -n 1 --date=short --format="%cd %H %d"`
 if [ $? -ne 0 ];
 then
   echo FAILED git log --tags -n 1 --date=short --format=.... | tee -a log/build-openm.log
