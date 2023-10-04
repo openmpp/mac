@@ -5,6 +5,7 @@
 #  OM_BUILD_CONFIGS=RELEASE,DEBUG (default: RELEASE)
 #  OM_MSG_USE=MPI                 (default: EMPTY)
 #  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProj,OzProjGen
+#  OMPP_BUILD_TAG                 (default: build from latest git)
 
 OM_BLD_MDLS=${MODEL_DIRS:-modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProj,OzProjGen}
 
@@ -51,6 +52,18 @@ if [ -z "$OM_P_MPI" ]; then
 else
   echo Build cluster version: using MPI | tee -a log/build-models.log 
 fi;
+
+# if OMPP_BUILD_TAG is set then build from that git tag
+
+if [ -n "$OMPP_BUILD_TAG" ]; then
+  echo " OMPP_BUILD_TAG     = $OMPP_BUILD_TAG" | tee -a log/build-models.log
+
+  if ! git checkout "$OMPP_BUILD_TAG" >> log/build-models.log 2>&1;
+  then
+    echo FAILED git checkout "$OMPP_BUILD_TAG" | tee -a log/build-models.log
+    exit 1
+  fi
+fi
 
 # build models
 

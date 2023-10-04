@@ -15,6 +15,7 @@ To build openM++ release for MacOS:
   ../ompp-mac/build/build-mac
 
 Environment variables:
+  OMPP_BUILD_TAG=v1.2.3          # default: build from latest git
   OM_BUILD_CONFIGS=RELEASE,DEBUG # default: RELEASE,DEBUG for libraries and RELEASE for models
   OM_DATE_STAMP=20220817         # default: current date as YYYYMMDD
   MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProj,OzProjGen

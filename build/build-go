@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # build openM++ Go oms web-service and dbcopy utility
+#  OMPP_BUILD_TAG   (default: build from latest git)
 
 # push into ompp root and make log directory if not exist
 
@@ -42,6 +43,20 @@ else
 fi
 
 pushd ompp-go
+
+# if OMPP_BUILD_TAG is set then build from that git tag
+
+if [ -n "$OMPP_BUILD_TAG" ]; then
+  echo " OMPP_BUILD_TAG = $OMPP_BUILD_TAG" | tee -a ../log/build-go.log
+
+  if ! git checkout "$OMPP_BUILD_TAG" >> ../log/build-go.log 2>&1;
+  then
+    echo FAILED git checkout "$OMPP_BUILD_TAG" | tee -a ../log/build-go.log
+    exit 1
+  fi
+fi
+
+# do build
 
 do_go_cmd()
 {
