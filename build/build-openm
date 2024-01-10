@@ -5,6 +5,10 @@
 #  OM_BUILD_CONFIGS=RELEASE,DEBUG (default: RELEASE,DEBUG)
 #  OM_MSG_USE=MPI                 (default: EMPTY)
 #  OMPP_BUILD_TAG                 (default: build from latest git)
+#  OMPP_BUILD_TAG                 (default: build from latest git)
+#  OMPP_CPP_BUILD_TAG             (default: build from latest git)
+#
+#  OMPP_CPP_BUILD_TAG has higher priority over OMPP_BUILD_TAG
 
 OM_BLD_CFG=${OM_BUILD_CONFIGS:-RELEASE,DEBUG}
 
@@ -72,14 +76,21 @@ else
   echo Build cluster version: using MPI >> log/build-openm.log
 fi;
 
-# if OMPP_BUILD_TAG is set then build from that git tag
+# if OMPP_CPP_BUILD_TAG or OMPP_BUILD_TAG is set then build from that git tag
 
 if [ -n "$OMPP_BUILD_TAG" ]; then
+  OM_BLD_TAG="$OMPP_BUILD_TAG"
   echo " OMPP_BUILD_TAG     = $OMPP_BUILD_TAG" | tee -a log/build-openm.log
+fi
+if [ -n "$OMPP_CPP_BUILD_TAG" ]; then
+  OM_BLD_TAG="$OMPP_CPP_BUILD_TAG"
+  echo " OMPP_CPP_BUILD_TAG = $OMPP_CPP_BUILD_TAG" | tee -a log/build-openm.log
+fi
 
-  if ! git checkout "$OMPP_BUILD_TAG" >> log/build-openm.log 2>&1;
+if [ -n "$OM_BLD_TAG" ]; then
+  if ! git checkout "$OM_BLD_TAG" >> log/build-openm.log 2>&1;
   then
-    echo FAILED git checkout "$OMPP_BUILD_TAG" | tee -a log/build-openm.log
+    echo FAILED git checkout "$OM_BLD_TAG" | tee -a log/build-openm.log
     exit 1
   fi
 fi
@@ -93,7 +104,7 @@ then
   exit 1
 fi
 
-[ -n "$OMPP_BUILD_TAG" ] && [ `git tag -l "$OMPP_BUILD_TAG"` = "$OMPP_BUILD_TAG" ] && OM_RUNTIME_VERSION="$OM_RUNTIME_VERSION $OMPP_BUILD_TAG"
+[ -n "$OM_BLD_TAG" ] && [ `git tag -l "$OM_BLD_TAG"` = "$OM_BLD_TAG" ] && OM_RUNTIME_VERSION="$OM_RUNTIME_VERSION $OM_BLD_TAG"
 
 echo " OM_RUNTIME_VERSION = $OM_RUNTIME_VERSION" | tee -a log/build-openm.log
 
