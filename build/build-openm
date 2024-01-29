@@ -5,7 +5,6 @@
 #  OM_BUILD_CONFIGS=RELEASE,DEBUG (default: RELEASE,DEBUG)
 #  OM_MSG_USE=MPI                 (default: EMPTY)
 #  OMPP_BUILD_TAG                 (default: build from latest git)
-#  OMPP_BUILD_TAG                 (default: build from latest git)
 #  OMPP_CPP_BUILD_TAG             (default: build from latest git)
 #
 #  OMPP_CPP_BUILD_TAG has higher priority over OMPP_BUILD_TAG
@@ -15,13 +14,13 @@ OM_BLD_CFG=${OM_BUILD_CONFIGS:-RELEASE,DEBUG}
 for C in ${OM_BLD_CFG//,/ }; do
   if [ "$C" != 'RELEASE' ] && [ "$C" != 'DEBUG' ]; then
     echo Error: incorrect value: $C, must be any combination of: RELEASE,DEBUG
-    exit 1    
+    exit 1
   fi
 done
 
 if [ -n "$OM_MSG_USE" ] && [ "$OM_MSG_USE" != 'EMPTY' ] && [ "$OM_MSG_USE" != 'MPI' ]; then
   echo Error: incorrect value: $OM_MSG_USE, must be one of: MPI or EMPTY
-  exit 1    
+  exit 1
 fi
 
 [ "$OM_MSG_USE" = 'MPI' ] && OM_P_MPI="OM_MSG_USE=MPI" || OM_P_MPI=
@@ -62,7 +61,7 @@ echo " OM_ROOT            = $OM_ROOT"
 
 if [ ! -d log ]; then mkdir log; fi
 
-# log build environment 
+# log build environment
 
 echo Log file: log/build-openm.log
 echo $START_DT Build openM++ run-time libraries and omc compiler > log/build-openm.log
@@ -88,6 +87,9 @@ if [ -n "$OMPP_CPP_BUILD_TAG" ]; then
 fi
 
 if [ -n "$OM_BLD_TAG" ]; then
+
+  echo "git checkout $OM_BLD_TAG"
+
   if ! git checkout "$OM_BLD_TAG" >> log/build-openm.log 2>&1;
   then
     echo FAILED git checkout "$OM_BLD_TAG" | tee -a log/build-openm.log
@@ -104,7 +106,11 @@ then
   exit 1
 fi
 
-[ -n "$OM_BLD_TAG" ] && [ `git tag -l "$OM_BLD_TAG"` = "$OM_BLD_TAG" ] && OM_RUNTIME_VERSION="$OM_RUNTIME_VERSION $OM_BLD_TAG"
+if [ -n "$OM_BLD_TAG" ];
+then
+  om_git_check_tag=`git tag -l "$OM_BLD_TAG"`
+  [ $? -eq 0 ] && [ "$om_git_check_tag" = "$OM_BLD_TAG" ] && OM_RUNTIME_VERSION="$OM_RUNTIME_VERSION $OM_BLD_TAG"
+fi
 
 echo " OM_RUNTIME_VERSION = $OM_RUNTIME_VERSION" | tee -a log/build-openm.log
 

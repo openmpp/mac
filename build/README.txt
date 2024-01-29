@@ -20,6 +20,11 @@ Environment variables:
   OM_DATE_STAMP=20220817         # default: current date as YYYYMMDD
   MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProj,OzProjGen
 
+Additional environment variable for build-open and build-model:
+  OMPP_CPP_BUILD_TAG=test_branch # default: build from latest git
+
+If both OMPP_BUILD_TAG and OMPP_CPP_BUILD_TAG specified then OMPP_CPP_BUILD_TAG take precedence
+
 Examples:
   MODEL_DIRS=RiskPaths,IDMM ./build-mac  # include only RiskPaths,IDMM models
   OM_DATE_STAMP=20220817    ./build-mac  # archive name openmpp_mac_x86_64_20220817.tar.gz
