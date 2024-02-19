@@ -113,10 +113,10 @@ for M in $OM_COPY_MDLS; do
 
 done
 
-# copy OzProj models
+# copy OzProjX models
 
-do_cmd cp -pv $BUNDLE_DIR/OzProj    $DEPLOY_DIR/models/bin/OzProj/ompp/bin/
-do_cmd cp -pv $BUNDLE_DIR/OzProjGen $DEPLOY_DIR/models/bin/OzProjGen/ompp/bin/
+do_cmd cp -pv $BUNDLE_DIR/OzProjX    $DEPLOY_DIR/models/bin/OzProjX/ompp/bin/
+do_cmd cp -pv $BUNDLE_DIR/OzProjGenX $DEPLOY_DIR/models/bin/OzProjGenX/ompp/bin/
 
 # MacOS: cleanup
 
