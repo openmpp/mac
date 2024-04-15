@@ -138,6 +138,7 @@ do_cmd cp -p lib/libopenm${OM_SFX_MPI}.a lib/libsqlite.a $DEPLOY_DIR/lib
 # copy Go bin executables and source code
 
 do_cmd cp -p bin/dbcopy $DEPLOY_DIR/bin
+do_cmd cp -p bin/dbget  $DEPLOY_DIR/bin
 do_cmd cp -p bin/oms    $DEPLOY_DIR/bin
 
 do_cmd mkdir $DEPLOY_DIR/ompp-go
@@ -145,6 +146,7 @@ do_cmd mkdir $DEPLOY_DIR/ompp-go
 do_cp_all ompp-go $DEPLOY_DIR/ompp-go
 
 do_cmd cp -pr ompp-go/dbcopy   $DEPLOY_DIR/ompp-go
+do_cmd cp -pr ompp-go/dbget    $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/ompp     $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/oms      $DEPLOY_DIR/ompp-go
 do_cmd cp -pr ompp-go/etc      $DEPLOY_DIR/ompp-go

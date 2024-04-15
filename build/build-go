@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# build openM++ Go oms web-service and dbcopy utility
+# build openM++ Go oms web-service and dbcopy, dbget utilities
 #  OMPP_BUILD_TAG   (default: build from latest git)
 
 # push into ompp root and make log directory if not exist
@@ -22,13 +22,13 @@ if [ ! -d log ]; then mkdir log; fi
 # log build environment 
 
 echo Log file: log/build-go.log
-echo `date` Build Go oms web-service and dbcopy utility | tee log/build-go.log 
+echo `date` Build Go oms web-service and dbcopy, dbget utilities | tee log/build-go.log 
 
-# build go oms web-service and dbcopy database utility
-# do not use unixODBC by defaults, it is required to have dynamic unixODBC.so installed
-# if you want to build dbcopy or oms with ODBC then modify commands below:
-#   go install -tags odbc go.openmpp.org/dbcopy
-#   go install -tags odbc go.openmpp.org/oms
+# build go oms web-service and dbcopy, dbget utilities
+# by default build is done without unixODBC, it is required to have dynamic unixODBC.so installed
+# if you want to build with ODBC then add
+#   -tags odbc,....
+# to the list of tags below
 
 if [ ! -d ompp-go ]; then
   
@@ -70,6 +70,7 @@ do_go_cmd()
 }
 
 do_go_cmd install -tags sqlite_math_functions,sqlite_omit_load_extension ./dbcopy
+do_go_cmd install -tags sqlite_math_functions,sqlite_omit_load_extension ./dbget
 do_go_cmd install -tags sqlite_math_functions,sqlite_omit_load_extension ./oms
 
 popd
