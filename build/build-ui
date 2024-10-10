@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 # build openM++ UI
+# environmemnt variables:
+#  OMPP_BUILD_TAG   (default: build from latest git)
 
 # push into ompp root and make log directory if not exist
 
@@ -22,8 +24,8 @@ if [ ! -d log ]; then mkdir log; fi
 # log build environment 
 
 echo Log file: log/build-ui.log
-echo `date` Build openM++ UI | tee log/build-ui.log 
-echo " OM_ROOT = $OM_ROOT" | tee -a log/build-ui.log 
+echo `date` Build openM++ UI | tee log/build-ui.log
+echo " OM_ROOT        = $OM_ROOT" | tee -a log/build-ui.log
 
 # get source code from git, if directory not already exist
 
@@ -36,13 +38,26 @@ if [ ! -d ompp-ui ]; then
     echo FAILED git clone | tee -a log/build-ui.log
     exit 1
   fi
+
 else
-  echo Skip: git clone
+  echo Skip: git clone | tee -a log/build-ui.log
+fi
+
+pushd ompp-ui
+
+# if OMPP_BUILD_TAG is set then build from that git tag
+
+if [ -n "$OMPP_BUILD_TAG" ]; then
+  echo " OMPP_BUILD_TAG = $OMPP_BUILD_TAG" | tee -a ../log/build-ui.log
+
+  if ! git checkout "$OMPP_BUILD_TAG" >> ../log/build-ui.log 2>&1;
+  then
+    echo FAILED git checkout "$OMPP_BUILD_TAG" | tee -a ../log/build-ui.log
+    exit 1
+  fi
 fi
 
 # build openM++ UI: node, npm, vue.js
-
-pushd ompp-ui
 
 do_npm_cmd()
 {
@@ -56,9 +71,10 @@ do_npm_cmd()
 }
 
 export npm_config_cache=$OM_ROOT/build/npm-cache
-export NODE_OPTIONS=--openssl-legacy-provider
 
 do_npm_cmd install
+
+export NODE_OPTIONS=--openssl-legacy-provider
 do_npm_cmd run build
 
 popd

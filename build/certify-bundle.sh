@@ -62,6 +62,7 @@ do_cmd mkdir  $BUNDLE_DIR
 do_cmd cp -pv ompp/bin/omc    $BUNDLE_DIR/
 do_cmd cp -pv ompp/bin/oms    $BUNDLE_DIR/
 do_cmd cp -pv ompp/bin/dbcopy $BUNDLE_DIR/
+do_cmd cp -pv ompp/bin/dbget  $BUNDLE_DIR/
 
 do_cmd find ompp/models/bin -type f -perm +u+x -exec cp -pv {} $BUNDLE_DIR/ \;
 
@@ -106,6 +107,7 @@ fi
 do_cmd cp -pv $BUNDLE_DIR/omc    $DEPLOY_DIR/bin/
 do_cmd cp -pv $BUNDLE_DIR/oms    $DEPLOY_DIR/bin/
 do_cmd cp -pv $BUNDLE_DIR/dbcopy $DEPLOY_DIR/bin/
+do_cmd cp -pv $BUNDLE_DIR/dbget  $DEPLOY_DIR/bin/
 
 for M in $OM_COPY_MDLS; do
 
@@ -113,10 +115,10 @@ for M in $OM_COPY_MDLS; do
 
 done
 
-# copy OzProj models
+# copy OzProjX models
 
-do_cmd cp -pv $BUNDLE_DIR/OzProj    $DEPLOY_DIR/models/bin/OzProj/ompp/bin/
-do_cmd cp -pv $BUNDLE_DIR/OzProjGen $DEPLOY_DIR/models/bin/OzProjGen/ompp/bin/
+do_cmd cp -pv $BUNDLE_DIR/OzProjX    $DEPLOY_DIR/models/bin/OzProjX/ompp/bin/
+do_cmd cp -pv $BUNDLE_DIR/OzProjGenX $DEPLOY_DIR/models/bin/OzProjGenX/ompp/bin/
 
 # MacOS: cleanup
 
