@@ -74,7 +74,6 @@ export npm_config_cache=$OM_ROOT/build/npm-cache
 
 do_npm_cmd install
 
-export NODE_OPTIONS=--openssl-legacy-provider
 do_npm_cmd run build
 
 popd
