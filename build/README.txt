@@ -18,7 +18,7 @@ Environment variables:
   OMPP_BUILD_TAG=v1.2.3          # default: build from latest git
   OM_BUILD_CONFIGS=RELEASE,DEBUG # default: RELEASE,DEBUG for libraries and RELEASE for models
   OM_DATE_STAMP=20220817         # default: current date as YYYYMMDD
-  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjGenX,OzProjX
+  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjGenX,OzProjX,SM1
 
 Additional environment variable for build-open and build-model:
   OMPP_CPP_BUILD_TAG=test_branch # default: build from latest git

@@ -4,13 +4,13 @@
 # environmemnt variables:
 #  OM_BUILD_CONFIGS=RELEASE,DEBUG (default: RELEASE)
 #  OM_MSG_USE=MPI                 (default: EMPTY)
-#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjGenX,OzProjX
+#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjGenX,OzProjX,SM1
 #  OMPP_BUILD_TAG                 (default: build from latest git)
 #  OMPP_CPP_BUILD_TAG             (default: build from latest git)
 #
 #  OMPP_CPP_BUILD_TAG has higher priority over OMPP_BUILD_TAG
 
-OM_BLD_MDLS=${MODEL_DIRS:-modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjGenX,OzProjX}
+OM_BLD_MDLS=${MODEL_DIRS:-modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjGenX,OzProjX,SM1}
 
 OM_BLD_CFG=${OM_BUILD_CONFIGS:-RELEASE}
 
@@ -90,7 +90,7 @@ for C in ${OM_BLD_CFG//,/ }; do
   [ "$C" = 'RELEASE' ] && OM_P_RLS="RELEASE=1" || OM_P_RLS=
 
   echo make $OM_P_RLS $OM_P_MPI all publish run
-  
+
   if ! make $OM_P_RLS $OM_P_MPI all publish run >> ../log/build-models.log 2>&1;
   then
     echo FAILED: make $OM_P_RLS $OM_P_MPI all publish run | tee -a ../log/build-models.log

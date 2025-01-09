@@ -2,6 +2,7 @@
 #
 # build openMpp R package
 
+
 # push into ompp root and make log directory if not exist
 
 if [ ! -d ompp ]; then 

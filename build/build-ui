@@ -4,6 +4,7 @@
 # environmemnt variables:
 #  OMPP_BUILD_TAG   (default: build from latest git)
 
+
 # push into ompp root and make log directory if not exist
 
 if [ ! -d ompp ]; then 

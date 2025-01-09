@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # build openM++ run-time libraries and omc compiler
+#
 # environmemnt variables:
 #  OM_BUILD_CONFIGS=RELEASE,DEBUG (default: RELEASE,DEBUG)
 #  OM_MSG_USE=MPI                 (default: EMPTY)
