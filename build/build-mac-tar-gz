@@ -4,7 +4,7 @@
 # environmemnt variables:
 #  OM_MSG_USE=MPI                 default: EMPTY
 #  OM_DATE_STAMP=20220817         default: current date as YYYYMMDD
-#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjX,OzProjGenX,SM1
+#  MODEL_DIRS=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths,OzProjGenX,OzProjX,SM1
 #  OMPP_BUILD_TAG                 default: build from latest git
 
 if [ -n "$OM_MSG_USE" ] && [ "$OM_MSG_USE" != 'EMPTY' ] && [ "$OM_MSG_USE" != 'MPI' ]; then
@@ -16,7 +16,7 @@ fi
 
 [ -n "$MODEL_DIRS" ] && \
   OM_BLD_MDLS=${MODEL_DIRS//,/ } || \
-  OM_BLD_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual IDMM RiskPaths OzProjX OzProjGenX SM1"
+  OM_BLD_MDLS="modelOne NewCaseBased NewTimeBased NewCaseBased_bilingual IDMM RiskPaths OzProjGenX OzProjX SM1"
 
 # push into ompp root and make log directory if not exist
 
