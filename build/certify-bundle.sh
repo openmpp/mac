@@ -9,6 +9,7 @@
 # export BUNDLE_VERSION=0.0.1
 # export DEPLOY_DIR=openmpp_mac_x86_64_20210629
 # export DEV_APP_USER_ID=ABCDEFGHIJ
+# export TEAM_ID=XYZ1234567
 # export MODEL_COPY_NAMES=modelOne,NewCaseBased,NewTimeBased,NewCaseBased_bilingual,IDMM,RiskPaths
 #
 
@@ -39,6 +40,7 @@ echo " DEPLOY_DIR       = $DEPLOY_DIR"
 echo " BUNDLE_DIR       = $BUNDLE_DIR"
 echo " BUNDLE_VERSION   = $BUNDLE_VERSION"
 echo " DEV_APP_USER_ID  = $DEV_APP_USER_ID"
+echo " TEAM_ID          = $TEAM_ID"
 echo " MODEL_COPY_NAMES = $OM_COPY_MDLS"
 
 # execute command and exit on errors
@@ -78,9 +80,9 @@ popd
 
 # submit to Apple
 
-echo xcrun notarytool submit ${BUNDLE_DIR}/img.zip --keychain-profile "notary-tool" --wait
+echo xcrun notarytool submit ${BUNDLE_DIR}/img.zip --keychain-profile "notary-tool" --team-id $TEAM_ID --wait
 
-if ! xcrun notarytool submit ${BUNDLE_DIR}/img.zip --keychain-profile "notary-tool" --wait > notarytool.submit.txt 2>&1;
+if ! xcrun notarytool submit ${BUNDLE_DIR}/img.zip --keychain-profile "notary-tool" --team-id $TEAM_ID --wait > notarytool.submit.txt 2>&1;
 then
   echo FAILED.
   cat notarytool.submit.txt
